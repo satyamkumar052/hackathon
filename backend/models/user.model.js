@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     token: {
         type: String,
         default: ""
+    },
+    totalPoints: {
+        type: Number,
+        default: 0
     }
 });
 const User = mongoose.model("User", userSchema);

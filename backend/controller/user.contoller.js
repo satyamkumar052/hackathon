@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import callGemini from "../utils/gemini.js";
 
 
 export const register = async (req, res) => {
@@ -9,6 +10,8 @@ export const register = async (req, res) => {
         const {email, password, username } = req.body;
 
         if (!email || !password || !username) return res.status(400).json({ message: "All fields are required" });
+
+        if(password.length < 6) return res.status(400).json({message: "Password must be at least 6 characters long"});
         
         const user = await User.findOne({ email });
         if (user) return res.status(400).json({message: "User already exists"});
@@ -40,6 +43,8 @@ export const login = async (req, res) =>{
 
         if (!email || !password) return res.status(400).json({ message: "All fields are required" });
 
+        if(password.length < 6) return res.status(400).json({message: "Password must be at least 6 characters long"});
+
         const user = await User.findOne({ email });
         
         if (!user) return res.status(404).json({message: "User does not exists"});
@@ -57,4 +62,42 @@ export const login = async (req, res) =>{
     } catch (err) {
         return res.status(500).json({ message: err.message });
     }
+};
+
+
+export const uploadProfilePicture = async (req, res) => {
+    try {
+        const {token} = req.body;
+    
+        const user = await User.findOne({token: token });
+        if(!user) return res.status(404).json({message: "User not found"});
+
+        user.profilePicture = req.file.filename;
+
+        await user.save();
+
+        res.json({message: "Profile Picture Updated"});
+
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+};
+
+export const ask_gemini = async (req, res) => {
+    try {
+
+        const { token, question } = req.body;
+
+        const user = await User.findOne({ token: token });
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        console.log("Gemini Answer 1");
+        const answer =  await callGemini(question);
+        console.log("Gemini Answer: ", answer);
+        res.json({ answer: answer });
+
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }   
 };
