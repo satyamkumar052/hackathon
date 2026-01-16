@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - TechMania</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="full-page-container">
+        
+        <div class="split-wrapper">
+            <section class="mega-division faq-div" onclick="activateDiv(this)">
+                <div class="inner-content">
+                    <h2 class="div-title"><i class="fas fa-question-circle"></i> FAQ</h2>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>How do I access my purchased courses?</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="accordion-body">
+                                <p>Once you login, head over to your "Dashboard". All your active courses will be listed under the 'My Learning' tab.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Are the certificates industry-recognized?</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="accordion-body">
+                                <p>Yes, all TechMania certificates are verified and recognized by our industry partners.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mega-division contact-div" onclick="activateDiv(this)">
+                <div class="inner-content">
+                    <h2 class="div-title"><i class="fas fa-paper-plane"></i> Get in Touch</h2>
+                    <form class="dynamic-form">
+                        <div class="form-row">
+                            <input type="text" placeholder="Full Name" required>
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Tell us how we can help..." rows="4"></textarea>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <footer class="mega-footer" onclick="activateDiv(this)">
+            <div class="footer-inner">
+                <p class="footer-label">Join our Community</p>
+                <div class="icon-group">
+                    <a href="#" class="social-icon fb"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon tw"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon li"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon ig"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function activateDiv(el) {
+            // Remove active class from FAQ, Contact, and Footer
+            document.querySelectorAll('.mega-division, .mega-footer').forEach(div => {
+                div.classList.remove('active-pop');
+            });
+            el.classList.add('active-pop');
+        }
+
+        const headers = document.querySelectorAll('.accordion-header');
+        headers.forEach(header => {
+            header.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
