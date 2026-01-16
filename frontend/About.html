@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechNova - Find the Right Path</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     
     <style>
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            /* font-family: 'Plus Jakarta Sans', sans-serif;  */
             overflow-x: hidden; 
             background-color: #F7F7F5;
         }
@@ -78,60 +78,16 @@
             border: 4px solid white;
             margin-left: -15px;
         }
+        .nav{
+            font-weight: 200;
+        }
     </style>
 </head>
 <body>
 
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container-fluid px-md-5">
-            <a class="navbar-brand fw-semibold fs-4" href="index.html" style="text-transform: none;">
-    <span class="text-orange-brand">Tech</span>Nova
-</a>
-            
-            <div class="collapse navbar-collapse justify-content-left" id="navbarNav">
-               <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link fw-semibold text-secondary" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link fw-semibold text-secondary" href="Aboutus.html">About Us</a></li>
-    
-                <li class="nav-item dropdown">
-                <a class="nav-link fw-semibold text-secondary dropdown-toggle" href="#" id="classDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Class
-                </a>
-        <ul class="dropdown-menu border-0 shadow-sm rounded-xl" aria-labelledby="classDropdown">
-            <li><a class="dropdown-item fw-medium" href="#">9th Standard</a></li>
-            <li><a class="dropdown-item fw-medium" href="#">10th Standard</a></li>
-            <li><a class="dropdown-item fw-medium" href="#">11th Standard</a></li>
-            <li><a class="dropdown-item fw-medium" href="#">12th Standard</a></li>
-        </ul>
-    </li>
 
-    <li class="nav-item"><a class="nav-link fw-semibold text-secondary" href="More.html">More</a></li>
-</ul>
-            </div>
-
-
-          <div class="d-flex align-items-center gap-4">
-    <div id="auth-guest-zone" class="d-flex gap-3">
-        <button class="btn bg-orange-brand btn-brand rounded-xl" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-    </div>
-
-    <div id="auth-user-zone" class="d-none">
-        <div class="dropdown">
-            <button class="btn border-0 d-flex align-items-center gap-2 dropdown-toggle" type="button" id="profileMenu" data-bs-toggle="dropdown">
-                <img id="user-avatar" src="" class="rounded-circle" width="35" height="35" alt="Profile">
-                <span id="display-name" class="fw-bold text-secondary"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end rounded-xl border-0 shadow">
-                <li><button class="dropdown-item py-2 text-danger fw-bold" onclick="logoutUser()">Logout</button></li>
-            </ul>
-        </div>
-    </div>
-</div>
-        </div>
-    </nav> -->
-
-   <nav class="navbar navbar-expand-lg navbar-light  py-3" style="background-color: #F7F7F5;">
-    <div class="container-fluid px-md-5">
+   <nav class="navbar navbar-expand-lg navbar-light py-3" style="background-color: #F7F7F5;">
+    <div style="font-weight: 100;" class="container-fluid px-md-5">
         <a class="navbar-brand fw-semibold fs-4" href="index.html" style="text-transform: none;">
             <span style="color: #FF5A26;">Tech</span>Nova
         </a>
@@ -148,22 +104,17 @@
                 <li class="nav-item">
                     <a class="nav-link fw-semibold text-secondary px-3" href="About.html">About Us</a>
                 </li>
-                    <li class="nav-item dropdown d-none" id="class-nav-item">
-    <a class="nav-link fw-semibold text-secondary dropdown-toggle px-3" 
-       href="#" 
-       id="classDropdown" 
-       role="button" 
-       data-bs-toggle="dropdown" 
-       aria-expanded="false">
-        Class
-    </a>
-    <ul class="dropdown-menu border-0 shadow-sm rounded-4" aria-labelledby="classDropdown">
-        <li><a class="dropdown-item fw-medium" href="dashboard.html">9th Standard</a></li>
-        <li><a class="dropdown-item fw-medium" href="dashboard.html">10th Standard</a></li>
-        <li><a class="dropdown-item fw-medium" href="dashboard.html">11th Standard</a></li>
-        <li><a class="dropdown-item fw-medium" href="dashboard.html">12th Standard</a></li>
-    </ul>
-</li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link fw-semibold text-secondary dropdown-toggle px-3" href="#" id="classDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Class
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow-sm rounded-4" aria-labelledby="classDropdown">
+                        <li><a class="dropdown-item fw-medium" href="dashboard.html">9th Standard</a></li>
+                        <li><a class="dropdown-item fw-medium" href="dashboard.html">10th Standard</a></li>
+                        <li><a class="dropdown-item fw-medium" href="dashboard.html">11th Standard</a></li>
+                        <li><a class="dropdown-item fw-medium" href="dashboard.html">12th Standard</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link fw-semibold text-secondary px-3" href="More.html">More</a>
                 </li>
@@ -191,30 +142,7 @@
         </div>
     </div>
 </nav>
-    <main class="container-fluid px-md-5 py-5 mt-lg-5">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <h1 class="hero-title mb-4">
-                    Find the right <br> 
-                    <span class="text-orange-brand">Path</span> for you
-                </h1>
-                <p class="text-secondary fs-4 mb-5" style="max-width: 500px;">
-                    See your personalised recommendations based on your interests and goals.
-                </p>
-                <div id="join-now-zone" class="d-flex align-items-center gap-4 flex-wrap">
-    <button class="btn bg-orange-brand btn-brand-lg rounded-xl" 
-            data-bs-toggle="modal" 
-            data-bs-target="#loginModal">
-        Join Now
-    </button>
-</div>
-            </div>
-
-            <div class="col-lg-5 position-relative d-none d-lg-block">
-                <img src="Cover.jpeg" class="img-fluid" alt="Hero Illustration">
-            </div>
-        </div>
-    </main>
+    
 
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -272,7 +200,7 @@
         </div>
     </div>
     <!-- ERROR TOAST -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
   <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div id="toastMessage" class="toast-body">
@@ -281,9 +209,8 @@
       <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
     </div>
   </div>
-  </div>
-</div>
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    </div>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
   <div id="successtoast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div id="toastMessage" class="toast-body">
@@ -292,11 +219,132 @@
       <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
     </div>
   </div>
-  </div>
+     </div>
 </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Gamified Learning</title>
+    <link rel="stylesheet" href="About.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Learning, <span class="highlight">Powered by Play.</span></h1>
+            <p>Empowering students through the spirit of competition and victory.</p>
+        </div>
+    </header>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="styled-title">Here's How it Works</h2>
+            <div class="how-grid">
+                <div class="how-card">
+                    <div class="floating-icon">🎯</div>
+                    <h3>Setup Profile</h3>
+                    <p>Choose your subjects and define your path to excellence.</p>
+                </div>
+                <div class="how-card">
+                    <div class="floating-icon">💻</div>
+                    <h3>Quest Mode</h3>
+                    <p>Engage in interactive challenges and earn your rank.</p>
+                </div>
+                <div class="how-card">
+                    <div class="floating-icon">🚩</div>
+                    <h3>Claim Victory</h3>
+                    <p>Maintain your streaks and lead the community leaderboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="different">
+        <div class="container">
+            <h2 class="styled-title">How are we different?</h2>
+            <div class="diff-container">
+                <div class="diff-col">
+                    <div class="diff-item">
+                        <div class="diff-text"><h4>Real Rewards</h4><p>Badges for every milestone achieved.</p></div>
+                        <div class="diff-icon">🏹</div>
+                    </div>
+                    <div class="diff-item">
+                        <div class="diff-text"><h4>Growth Mindset</h4><p>Focused on local and global success.</p></div>
+                        <div class="diff-icon">🚀</div>
+                    </div>
+                </div>
+                <div class="diff-center">
+                    <div class="main-circle"><span>🦁</span></div>
+                </div>
+                <div class="diff-col">
+                    <div class="diff-item reverse">
+                        <div class="diff-icon">⚡</div>
+                        <div class="diff-text"><h4>Bite-Sized</h4><p>Learn efficiently in small windows.</p></div>
+                    </div>
+                    <div class="diff-item reverse">
+                        <div class="diff-icon">🤝</div>
+                        <div class="diff-text"><h4>Unity in Learning</h4><p>Learn together with your squad.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Meet the Collaborators</h2>
+            <div class="team-grid">
+                <div class="member">
+                    <div class="avatar-circle">👤</div>
+                    <h4>Shiv Ujeli</h4>
+                    <p class="role">Team Leader</p>
+                </div>
+                <div class="member">
+                    <div class="avatar-circle">👨‍💻</div>
+                    <h4>Priya Choudhary</h4>
+                    <p class="role">Frontend Developer</p>
+                </div>
+                <div class="member">
+                    <div class="avatar-circle">🎨</div>
+                    <h4>Chaitanya Rane</h4>
+                    <p class="role">UI/UX Designer</p>
+                </div>
+                <div class="member">
+                    <div class="avatar-circle">🧪</div>
+                    <h4>Shashank kavlekar</h4>
+                    <p class="role">Backend Developer</p>
+                </div>
+                <div class="member">
+                    <div class="avatar-circle">👑</div>
+                    <h4>Satyam kumar</h4>
+                    <p class="role">Full Stack Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2026 [Platform Name]. All Rights Reserved.</p>
+        </div>
+    </footer>
+
 </body>
 </html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support – TechNova</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- BASE PAGE CSS -->
+    <link rel="stylesheet" href="More.css">
+
+    <style>
+        
+
+    </style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-light py-3" style="background:#F7F7F5;">
+    <div class="container-fluid px-md-5">
+        <a class="navbar-brand fw-semibold fs-4" href="index.html" style="text-transform: none;">
+            <span style="color:#FF5A26;">Tech</span>Nova
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="About.html">About Us</a></li>
+
+                <li class="nav-item dropdown d-none" id="class-nav-item">
+                    <a class="nav-link fw-semibold text-secondary dropdown-toggle px-3" href="#" id="classDropdown" role="button" data-bs-toggle="dropdown">
+                        Class
+                    </a>
+                    <ul class="dropdown-menu shadow border-0 rounded-4">
+                        <li><a class="dropdown-item" href="dashboard.html">9th Standard</a></li>
+                        <li><a class="dropdown-item" href="dashboard.html">10th Standard</a></li>
+                        <li><a class="dropdown-item" href="dashboard.html">11th Standard</a></li>
+                        <li><a class="dropdown-item" href="dashboard.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="More.html">More</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-3">
+                <div id="auth-guest-zone">
+                    <button class="btn px-4 py-2 rounded-pill fw-bold" style="background-color: #FF5A26; color: white;" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login
+                    </button>
+                </div>
+
+                <div id="auth-user-zone" class="d-none">
+                    <div class="dropdown">
+                        <button class="btn border-0 d-flex align-items-center gap-2 dropdown-toggle" type="button" id="profileMenu" data-bs-toggle="dropdown">
+                            <img id="user-avatar" src="" class="rounded-circle" width="35" height="35" alt="Profile">
+                            <span id="display-name" class="fw-bold text-secondary"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end rounded-4 border-0 shadow">
+                            <li><button class="dropdown-item py-2 text-danger fw-bold" onclick="logoutUser()">Logout</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= BASE SUPPORT PAGE ================= -->
+<div class="full-page-container">
+
+    <div class="split-wrapper">
+
+        <!-- FAQ -->
+        <section class="mega-division faq-div" onclick="activateDiv(this)">
+            <div class="inner-content">
+                <h2 class="div-title"><i class="fas fa-question-circle"></i> FAQ</h2>
+
+                <div class="accordion">
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>How do I access my purchased courses?</span>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Login → Dashboard → My Learning.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Are certificates recognized?</span>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Yes, verified by industry partners.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Offline access available?</span>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Streaming only. Mobile app coming.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Refund policy?</span>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>7-day refund if under 10% completion.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="mega-division contact-div" onclick="activateDiv(this)">
+            <div class="inner-content">
+                <h2 class="div-title"><i class="fas fa-paper-plane"></i> Get in Touch</h2>
+
+                <form class="dynamic-form">
+                    <div class="form-row">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <input type="text" placeholder="Subject">
+                    <textarea rows="4" placeholder="Message"></textarea>
+                    <button class="submit-btn" type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="mega-footer" onclick="activateDiv(this)">
+        <div class="footer-inner">
+            <p class="footer-label">Join our Community</p>
+            <div class="icon-group">
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- ================= JS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+
+<script>
+document.querySelectorAll('.accordion-header').forEach(header=>{
+    header.addEventListener('click',()=>{
+        const item = header.parentElement;
+        document.querySelectorAll('.accordion-item')
+            .forEach(i => i !== item && i.classList.remove('active'));
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+</body>
+</html>
