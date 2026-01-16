@@ -6,7 +6,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import UserRouter from "./routes/user.routes.js";
-import QuizRouter from "./routes/quiz.routes.js";
 import ScoreRouter from "./routes/score.routes.js";
 
 
@@ -21,7 +20,6 @@ app.use(express.static("public"));
 
 
 app.use("/", UserRouter);
-app.use("/", QuizRouter);
 app.use("/", ScoreRouter);
 
 

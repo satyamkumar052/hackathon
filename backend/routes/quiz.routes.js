@@ -1,5 +1,4 @@
 import express from "express";
-import Subject from "../models/subject.model.js";
 
 const router = express.Router();
 
