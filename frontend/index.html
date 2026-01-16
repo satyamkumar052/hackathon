@@ -85,23 +85,75 @@
                 </div>
             </div>
 
-            <div class="relative h-full hidden lg:flex items-center justify-center">
-                <div class="absolute top-10 right-0 bg-white p-6 rounded-[2rem] shadow-2xl z-20 border border-gray-50">
-                    <p class="text-xs font-bold text-gray-400 mb-4 text-right">Certified teachers only</p>
-                    <div class="flex -space-x-4 justify-end">
-                        <div class="w-14 h-14 rounded-full border-4 border-white bg-gray-200 overflow-hidden"><img src="https://i.pravatar.cc/100?u=1" alt=""></div>
-                        <div class="w-14 h-14 rounded-full border-4 border-white bg-gray-200 overflow-hidden"><img src="https://i.pravatar.cc/100?u=2" alt=""></div>
-                        <div class="w-14 h-14 rounded-full border-4 border-white bg-gray-200 overflow-hidden"><img src="https://i.pravatar.cc/100?u=3" alt=""></div>
-                        <div class="w-14 h-14 rounded-full border-4 border-white bg-[#ffca28] flex items-center justify-center text-sm font-black">135+</div>
-                    </div>
-                </div>
+            <!-- RIGHT IMAGE SECTION -->
+<div class="relative flex items-center justify-center w-full h-full py-10">
 
-                <div class="relative w-full max-w-2xl">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/female-student-flying-on-pencil-5596377-4663372.png" 
-                         alt="Illustration" 
-                         class="w-full h-auto drop-shadow-3xl">
-                </div>
-            </div>
+  <!-- Dashed circle -->
+  <div
+    class="absolute 
+           w-[380px] h-[380px] 
+           sm:w-[460px] sm:h-[460px] 
+           lg:w-[520px] lg:h-[520px]
+           border border-dashed border-gray-200 
+           rounded-full">
+  </div>
+
+  <!-- Stars -->
+  <span class="absolute top-[18%] left-[10%] text-[#ffca28] text-4xl">★</span>
+  <span class="absolute top-[22%] right-[18%] text-[#ffca28] text-3xl rotate-12">★</span>
+  <span class="absolute bottom-[18%] left-[45%] text-[#ffca28] text-2xl">★</span>
+
+  <!-- Certified teachers badge -->
+  <div
+    class="absolute 
+           top-6 right-6 
+           bg-white 
+           p-4 
+           rounded-2xl 
+           shadow-xl 
+           border border-gray-100 
+           z-20">
+
+    <p class="text-[11px] font-bold text-gray-400 text-right mb-2">
+      Certified teachers only
+    </p>
+
+    <div class="flex -space-x-3 justify-end">
+      <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?u=11">
+      <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?u=12">
+      <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?u=13">
+      <div class="w-10 h-10 rounded-full bg-[#ffca28] border-2 border-white flex items-center justify-center text-xs font-extrabold">
+        135+
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Image -->
+  <div
+    class="relative 
+           w-[300px] 
+           sm:w-[360px] 
+           lg:w-[460px] 
+           z-10">
+
+    <img src="Cover.jpeg" alt="Student on pencil" class="w-full h-auto object-contain" />
+
+    <!-- Cloud -->
+    <div class="absolute bottom-4 right-[-12px] opacity-80">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.2" class="w-24 text-gray-300">
+        <path d="M17.5 19c2.5 0 4.5-2 4.5-4.5 0-2.3-1.7-4.1-3.9-4.4
+                 -.5-3.1-3.2-5.6-6.4-5.6
+                 -2.5 0-4.7 1.4-5.8 3.5
+                 C3.3 8.3 1 10.4 1 13
+                 c0 3.3 2.7 6 6 6h10.5z"/>
+      </svg>
+    </div>
+
+  </div>
+
+</div>
+
 
         </div>
     </main>
