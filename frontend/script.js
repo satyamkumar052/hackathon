@@ -146,10 +146,13 @@ function updateAuthUI() {
 }
 
 // ================= LOGOUT =================
+// ================= LOGOUT =================
 function logoutUser() {
+    // 1. Clear the EXACT keys used in login
     localStorage.removeItem("authToken");
     localStorage.removeItem("userEmail");
-    updateAuthUI();
+    
+    // 2. Redirect to index and refresh to reset UI
     window.location.href = "index.html";
 }
 
@@ -205,17 +208,16 @@ function updateAuthUI() {
     }
 }
 
-// ================= CONSOLIDATED NAVBAR & HERO UI =================
+// ================= CONSOLIDATED UI UPDATE =================
 function updateAuthUI() {
-    // 1. Get all necessary elements
     const guestZone = document.getElementById("auth-guest-zone");
     const userZone = document.getElementById("auth-user-zone");
     const joinNowZone = document.getElementById("join-now-zone");
-    const classNavItem = document.getElementById("class-nav-item"); // The dropdown container
+    const classNavItem = document.getElementById("class-nav-item");
     const displayName = document.getElementById("display-name");
     const avatar = document.getElementById("user-avatar");
 
-    // 2. Check login status
+    // Check keys saved during login
     const token = localStorage.getItem("authToken");
     const email = localStorage.getItem("userEmail");
 
@@ -224,15 +226,11 @@ function updateAuthUI() {
         if (guestZone) guestZone.classList.add("d-none");
         if (userZone) userZone.classList.remove("d-none");
         
-        // Show the Class Dropdown
-        if (classNavItem) {
-            classNavItem.classList.remove("d-none");
-        }
+        // SHOW the Class Dropdown
+        if (classNavItem) classNavItem.classList.remove("d-none");
         
-        // Hide "Join Now" button on hero section
-        if (joinNowZone) {
-            joinNowZone.classList.add("d-none");
-        }
+        // HIDE "Join Now" button on hero section
+        if (joinNowZone) joinNowZone.classList.add("d-none");
 
         // Set Profile Info
         if (displayName) displayName.textContent = email.split("@")[0];
@@ -243,30 +241,132 @@ function updateAuthUI() {
         if (guestZone) guestZone.classList.remove("d-none");
         if (userZone) userZone.classList.add("d-none");
 
-        // Hide the Class Dropdown
-        if (classNavItem) {
-            classNavItem.classList.add("d-none");
-        }
+        // HIDE the Class Dropdown
+        if (classNavItem) classNavItem.classList.add("d-none");
 
-        // Show "Join Now" button
-        if (joinNowZone) {
-            joinNowZone.classList.remove("d-none");
-        }
+        // SHOW "Join Now" button
+        if (joinNowZone) joinNowZone.classList.remove("d-none");
     }
 }
 
-// Example logic that should be in your script.js
-window.onload = function() {
-    const loggedInUser = localStorage.getItem('user'); // Or however you store session
-    if (loggedInUser) {
-        document.getElementById('auth-guest-zone').classList.add('d-none');
-        document.getElementById('auth-user-zone').classList.remove('d-none');
-        document.getElementById('class-nav-item')?.classList.remove('d-none');
-        // Set name and avatar...
+// Run this once when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    updateAuthUI();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn'); // Or however you track login state
+    const classNavItem = document.getElementById('class-nav-item');
+    const guestZone = document.getElementById('auth-guest-zone');
+    const userZone = document.getElementById('auth-user-zone');
+
+    if (isLoggedIn === 'true') {
+        classNavItem.classList.remove('d-none');
+        guestZone.classList.add('d-none');
+        userZone.classList.remove('d-none');
+    } else {
+        classNavItem.classList.add('d-none');
+        guestZone.classList.remove('d-none');
+        userZone.classList.add('d-none');
     }
-};
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Run UI check as soon as any page loads
+    updateAuthUI();
+
+    // ================= LOGIN LOGIC =================
+    const loginForm = document.querySelector("#loginModal form");
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            try {
+                const res = await fetch("http://localhost:8080/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    showErrorToast(data.message || "Invalid credentials");
+                    return;
+                }
+
+                // Save data to localStorage
+                localStorage.setItem("authToken", data.token);
+                localStorage.setItem("userEmail", email);
+
+                // Close Modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById("loginModal"));
+                if (modal) modal.hide();
+
+                showsuccesstoast("Login successful 🎉");
+                
+                // Redirect to dashboard (which also triggers updateAuthUI on load)
+                window.location.href = "dashboard.html";
+
+            } catch (err) {
+                showErrorToast("Server error. Try again later.");
+            }
+        });
+    }
+});
+
+// ================= THE MASTER UI FUNCTION =================
+// This function must be globally accessible so it can be called anywhere
+function updateAuthUI() {
+    const guestZone = document.getElementById("auth-guest-zone");
+    const userZone = document.getElementById("auth-user-zone");
+    const classNavItem = document.getElementById("class-nav-item");
+    const joinNowZone = document.getElementById("join-now-zone");
+    const displayName = document.getElementById("display-name");
+    const avatar = document.getElementById("user-avatar");
+
+    const token = localStorage.getItem("authToken");
+    const email = localStorage.getItem("userEmail");
+
+    if (token && email) {
+        // USER IS LOGGED IN
+        if (guestZone) guestZone.classList.add("d-none");
+        if (userZone) userZone.classList.remove("d-none");
+        if (classNavItem) classNavItem.classList.remove("d-none");
+        if (joinNowZone) joinNowZone.classList.add("d-none");
+
+        // Set Profile Details
+        if (displayName) displayName.textContent = email.split("@")[0];
+        if (avatar) avatar.src = `https://ui-avatars.com/api/?name=${email}&background=ff5722&color=fff`;
+    } else {
+        // USER IS GUEST
+        if (guestZone) guestZone.classList.remove("d-none");
+        if (userZone) userZone.classList.add("d-none");
+        if (classNavItem) classNavItem.classList.add("d-none");
+        if (joinNowZone) joinNowZone.classList.remove("d-none");
+    }
+}
 
 function logoutUser() {
-    localStorage.removeItem('user'); 
-    window.location.href = 'index.html';
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userEmail");
+    window.location.href = "index.html";
+}
+
+// Toast Helpers
+function showErrorToast(msg) {
+    const toast = document.getElementById("errorToast");
+    if(toast) {
+        document.getElementById("toastMessage").textContent = msg;
+        new bootstrap.Toast(toast).show();
+    }
+}
+
+function showsuccesstoast(msg) {
+    const toast = document.getElementById("successtoast");
+    if(toast) {
+        toast.querySelector(".toast-body").textContent = msg;
+        new bootstrap.Toast(toast).show();
+    }
 }

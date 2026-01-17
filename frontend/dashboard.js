@@ -1,34 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
     const subjectGrid = document.getElementById('subjectGrid');
 
-    // Science icon updated to Flask (bi-flask) as per your image
+    // Each subject now contains exactly 4 chapters for you to rename
     const subjects = [
-        { name: "Algebra", icon: "bi-calculator-fill" },
-        { name: "Geometry", icon: "bi-bounding-box" },
-        { name: "Science", icon: "bi-mortarboard-fill" },
-        { name: "English", icon: "bi-chat-left-text-fill" },
-        { name: "History", icon: "bi-hourglass-split" },
-        { name: "Geography", icon: "bi-globe-americas" }
+        { 
+            name: "Algebra", 
+            icon: "bi-calculator-fill",
+            chapters: ["Sets", "Real Numbers", "Polynomials", "Ratio and Proportion"]
+        },
+        { 
+            name: "Geometry", 
+            icon: "bi-bounding-box",
+            chapters: ["basic Concepts", "Parallel Lines", "Triangles", "Construction of Triangles"]
+        },
+        { 
+            name: "Science", 
+            icon: "bi-mortarboard-fill",
+            chapters: ["laws of motion", "work and energy", "Current Electricity", "Measurements of Matter"]
+        },
+        { 
+            name: "English", 
+            icon: "bi-chat-left-text-fill",
+            chapters: ["Life", "A Synposis", "have you ever seen .?", "Have you Thoughts of the verb"]
+        },
+        { 
+            name: "History", 
+            icon: "bi-hourglass-split",
+            chapters: ["Sources of history", "India: Events after 1960", "India's Internal Challenges", "Economic Development"]
+        },
+        { 
+            name: "Geography", 
+            icon: "bi-globe-americas",
+            chapters: ["Distributional Maps", "Exogenetic Movements", "Exogentetc movements part-1", "Exogentetc movements part-2"]
+        }
     ];
 
     subjects.forEach((sub, subIdx) => {
         let chaptersHTML = '';
-        // Har subject card ke liye ek unique accordion ID taaki usi card ke chapters aapas mein switch hon
         const accordionId = `accordion-${subIdx}`; 
 
-        for(let i = 1; i <= 5; i++) {
+        sub.chapters.forEach((chapterName, chIdx) => {
             chaptersHTML += `
                 <div class="mb-2">
-                    <button class="chapter-btn" data-bs-toggle="collapse" data-bs-target="#ch-${subIdx}-${i}">
-                        Chapter ${i} <i class="bi bi-chevron-down small"></i>
+                    <button class="chapter-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ch-${subIdx}-${chIdx}">
+                        ${chapterName} <i class="bi bi-chevron-down small"></i>
                     </button>
-                    <div id="ch-${subIdx}-${i}" class="collapse ps-2" data-bs-parent="#${accordionId}">
-                        <a href="#" class="option-link"><i class="bi bi-input-cursor-text me-2"></i>Textbox</a>
-                        <a href="#" class="option-link"><i class="bi bi-file-earmark-text me-2"></i>Notes</a>
-                        <a href="#" class="option-link"><i class="bi bi-controller me-2"></i>Quiz</a>
+                    <div id="ch-${subIdx}-${chIdx}" class="collapse" data-bs-parent="#${accordionId}">
+                        <div class="p-2 border-start ms-3">
+                            <a href="#" class="option-link"><i class="bi bi-input-cursor-text me-2"></i>Textbox</a>
+                            <a href="#" class="option-link"><i class="bi bi-file-earmark-text me-2"></i>Notes</a>
+                            <a href="#" class="option-link"><i class="bi bi-controller me-2"></i>Quiz</a>
+                        </div>
                     </div>
                 </div>`;
-        }
+        });
 
         subjectGrid.innerHTML += `
             <div class="col-md-4">
@@ -42,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`;
     });
 
-    // Chart remains blank as requested
+    // Chart remains blank (0 points) as requested initially
     const ctx = document.getElementById('performanceChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
