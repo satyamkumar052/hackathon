@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievement Dashboard | TechNova</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-navy: #2c3e50;
+            --achieved-gold: #f1c40f;
+            --unachieved-border: #dcd7c9;
+            --cream-bg: radial-gradient(circle at center, #ffffff 0%, #fffbf0 40%, #fdf2e9 100%);
+            --brand-orange: #FF5A26;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--cream-bg);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* --- NAVBAR STYLES --- */
+        .navbar {
+            background-color: #F7F7F5 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* --- DASHBOARD STYLES --- */
+        .badge-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-navy);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            border-radius: 30px;
+            padding: 40px 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            border: none;
+        }
+
+        .badge-wrapper {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .badge-wrapper img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .status-label {
+            padding: 8px 25px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+
+        /* STATE: UN-ACHIEVED */
+        .status-unachieved {
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px dashed var(--unachieved-border) !important;
+            opacity: 0.7;
+        }
+
+        .status-unachieved img {
+            filter: grayscale(1) opacity(0.3);
+        }
+
+        .status-unachieved .status-label {
+            background-color: #f5f5f5;
+            color: #bdc3c7;
+            border-color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light py-3">
+        <div class="container-fluid px-md-5">
+            <a class="navbar-brand fw-bold fs-4" href="index.html">
+                <span style="color: var(--brand-orange);">Tech</span>Nova
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="About.html">About Us</a></li>
+
+                    <li class="nav-item dropdown d-none" id="class-nav-item">
+                        <a class="nav-link fw-semibold text-secondary dropdown-toggle px-3" href="#" id="classDropdown" role="button" data-bs-toggle="dropdown">
+                            Class
+                        </a>
+                        <ul class="dropdown-menu shadow border-0 rounded-4">
+                            <li><a class="dropdown-item" href="dashboard.html">9th Standard</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html">10th Standard</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html">11th Standard</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html">12th Standard</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="More.html">More</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-secondary px-3" href="badges.html">Achievement</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div id="auth-guest-zone">
+                        <button class="btn px-4 py-2 rounded-pill fw-bold text-white" style="background-color: var(--brand-orange);" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Login
+                        </button>
+                    </div>
+
+                    <div id="auth-user-zone" class="d-none">
+                        <div class="dropdown">
+                            <button class="btn border-0 d-flex align-items-center gap-2 dropdown-toggle" type="button" id="profileMenu" data-bs-toggle="dropdown">
+                                <img id="user-avatar" src="" class="rounded-circle" width="35" height="35" alt="Profile">
+                                <span id="display-name" class="fw-bold text-secondary"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end rounded-4 border-0 shadow">
+                                <li><button class="dropdown-item py-2 text-danger fw-bold" onclick="logoutUser()">Logout</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="badge-container">
+        <header>
+            <h1>My Achievements</h1>
+        </header>
+
+        <main class="badge-grid">
+            <div class="card status-unachieved shadow-sm">
+                <div class="badge-wrapper">
+                    <img src="assets/KC.png" alt="Knowledge Champion">
+                </div>
+                <h3>Knowledge Champion</h3>
+                <p>Earned by achieving a perfect score on any module quiz.</p>
+                <div class="status-label">Unachieved</div>
+            </div>
+
+            <div class="card status-unachieved shadow-sm">
+                <div class="badge-wrapper">
+                    <img src="assets/Rising.png" alt="Rising Scholar">
+                </div>
+                <h3>The Rising Scholar</h3>
+                <p>Awarded for completing your first week of consistent study.</p>
+                <div class="status-label">Unachieved</div>
+            </div>
+
+            <div class="card status-unachieved shadow-sm">
+                <div class="badge-wrapper">
+                    <img src="assets/Gold.jpg" alt="Gold Standard">
+                </div>
+                <h3>Gold Standard</h3>
+                <p>Unlocked after spending 20+ hours on the platform.</p>
+                <div class="status-label">Unachieved</div>
+            </div>
+             <div class="card status-unachieved">
+                <div class="badge-wrapper">
+                    <img src="assets/Master.png" alt="Master of Theory">
+                </div>
+                <h3>Master of Theory</h3>
+                <p>Successfully completed all theoretical reading assignments.</p>
+                <div class="status-label">Unachieved</div>
+            </div>
+
+            <div class="card status-unachieved">
+                <div class="badge-wrapper">
+                    <img src="assets/TB.png" alt="The Trailblazer">
+                </div>
+                <h3>The Trailblazer</h3>
+                <p>Awarded for submitting a high-quality capstone project.</p>
+                <div class="status-label">Unachieved</div>
+            </div>
+
+            <div class="card status-unachieved">
+                <div class="badge-wrapper">
+                    <img src="assets/AE.png" alt="Academic Excellence">
+                </div>
+                <h3>Academic Excellence</h3>
+                <p>Final honors for completing the entire course curriculum.</p>
+                <div class="status-label">Unachieved</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

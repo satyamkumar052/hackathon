@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacious AI Search</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        /* Sticky Button */
+        #chat-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #ff6600;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.4);
+            z-index: 1000;
+            font-size: 30px;
+            transition: 0.3s;
+        }
+
+        #chat-trigger:hover { transform: scale(1.1); }
+
+        /* Overlay */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Medium-Large Modal with Huge Spacing */
+        #search-modal {
+            width: 700px; /* Thoda aur bada width */
+            background: white;
+            border-radius: 35px;
+            padding: 60px; /* Badi padding for extreme space */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            position: relative;
+            border-top: 12px solid #ff6600;
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-x {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 35px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        /* Search Bar with Icon on Left */
+        .search-wrapper {
+            position: relative;
+            margin: 40px 0; /* Huge vertical space */
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            border: 2px solid #eee;
+            border-radius: 20px;
+            padding: 5px 20px;
+            transition: 0.3s;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: #ff6600;
+            background: white;
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.1);
+        }
+
+        .search-icon-left {
+            font-size: 22px;
+            color: #999;
+            margin-right: 15px;
+        }
+
+        .search-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 20px 0;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .go-btn {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .go-btn:hover { background: #e65c00; }
+
+        /* Result Section */
+        #result-display {
+            display: none;
+            margin-top: 50px; /* Bhoat zyada space */
+            padding: 40px;
+            background: #fffaf7;
+            border-radius: 20px;
+            border-left: 6px solid #ff6600;
+        }
+
+        .api-text {
+            font-size: 1.2rem;
+            line-height: 2.2; /* Bullet points ke beech extra space */
+            color: #444;
+            white-space: pre-line;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; color: #222; }
+
+        /* Overlay Styles */
+#chatHubOverlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Container */
+.search-modal-container {
+    width: 90%;
+    max-width: 700px;
+    background: white;
+    border-radius: 35px;
+    padding: 60px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    position: relative;
+    border-top: 12px solid #ff6600;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-title { margin: 0; font-size: 2.5rem; color: #222; font-weight: 800; }
+
+.close-x {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 35px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+/* Search Bar Styles */
+.search-wrapper {
+    position: relative;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    border: 2px solid #eee;
+    border-radius: 20px;
+    padding: 5px 20px;
+}
+
+.search-wrapper input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 20px 0;
+    font-size: 1.2rem;
+}
+
+.go-btn {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Results Area */
+#result-display {
+    display: none;
+    margin-top: 30px;
+    padding: 25px;
+    background: #fffaf7;
+    border-radius: 20px;
+    border-left: 6px solid #ff6600;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.api-text { font-size: 1.1rem; line-height: 1.8; color: #444; }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome Bro!</h1>
+    <p>The chatbot now has massive padding and a search icon inside the bar.</p>
+
+    <div id="chat-trigger" onclick="openMe()">🔍</div>
+
+    <div id="overlay" onclick="closeMe()">
+        <div id="search-modal" onclick="event.stopPropagation()">
+            <span class="close-x" onclick="closeMe()">&times;</span>
+            
+            <h1>Search Hub</h1>
+            
+            <div class="search-wrapper">
+                <span class="search-icon-left">🔍</span>
+                <input type="text" id="userInput" placeholder="Type your query..." onkeypress="if(event.key==='Enter') startSearch()">
+                <button class="go-btn" onclick="startSearch()">Search</button>
+            </div>
+
+            <div id="result-display">
+                <div id="finalOutput" class="api-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+function openChatHub() {
+    // Selects the overlay and makes it visible
+    const overlay = document.getElementById('chatHubOverlay');
+    overlay.style.display = 'flex';
+}
+
+function closeChatHub() {
+    const overlay = document.getElementById('chatHubOverlay');
+    overlay.style.display = 'none';
+    // Reset search results when closing
+    document.getElementById('result-display').style.display = 'none';
+    document.getElementById('userInput').value = '';
+}
+
+function startSearch() {
+    const input = document.getElementById('userInput').value;
+    const resDiv = document.getElementById('result-display');
+    const output = document.getElementById('finalOutput');
+
+    if(input.trim() === "") return;
+
+    resDiv.style.display = 'block';
+    output.innerText = "Searching TechNova database...";
+
+    // Mock API Response
+    const mockResponse = "• Result found for: " + input + "\n\n• Please contact your instructor for detailed module access.\n• Resources are available in the '11th Standard' tab.";
+
+    setTimeout(() => {
+        output.innerText = mockResponse;
+    }, 600); 
+}
+
+// Close modal if user clicks outside the white box
+window.onclick = function(event) {
+    const overlay = document.getElementById('chatHubOverlay');
+    if (event.target == overlay) {
+        closeChatHub();
+    }
+}
+</script>
+
+ <script>
+        function openChatHub() {
+    document.getElementById('chatHubOverlay').style.display = 'flex';
+    document.getElementById('aiInput').focus();
+}
+
+function closeChatHub() {
+    document.getElementById('chatHubOverlay').style.display = 'none';
+}
+
+function askAI() {
+    const input = document.getElementById('aiInput').value;
+    const resDiv = document.getElementById('result-display');
+    const responseText = document.getElementById('aiResponse');
+
+    if (input.trim() === "") return;
+
+    resDiv.style.display = 'block';
+    responseText.innerHTML = "<em>AI is thinking...</em>";
+
+    // Simulating an AI Response logic
+    setTimeout(() => {
+        if (input.toLowerCase().includes("motion")) {
+            responseText.innerHTML = "<strong>Newton's Laws:</strong><br>1. Inertia<br>2. F=ma<br>3. Action/Reaction.";
+        } else {
+            responseText.innerHTML = "I found some resources on <strong>" + input + "</strong> in your Grade 11 module. Would you like to open them?";
+        }
+    }, 800);
+}
+    </script>
+
+
+</body>
+</html>
